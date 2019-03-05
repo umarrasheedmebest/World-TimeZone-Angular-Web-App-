@@ -3,6 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {MomentTimezoneModule} from 'angular-moment-timezone';
+import {MomentModule} from 'angular2-moment';
+import { Ng5SliderModule } from 'ng5-slider';
+import { DatePipe } from '@angular/common'
 
 @NgModule({
   declarations: [
@@ -10,9 +14,12 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MomentTimezoneModule,
+    MomentModule,
+    Ng5SliderModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
