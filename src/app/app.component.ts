@@ -16,12 +16,16 @@ export class AppComponent {
   newDate = new Date();
   zoneName: any;
   currentZoneOffset: any;
-  currentDate = this.datepipe.transform(this.newDate, 'yyyy-MM-dd');
+  newdatepipe: DatePipe
   options: Options = {
-    ariaLabel: 'High value',
-    ariaLabelHigh: 'Testing',
-    floor: (new Date(this.currentDate + 'T00:00:00.000Z')).getTime(),
-    ceil: (new Date(this.currentDate + 'T23:59:59.000Z')).getTime()
+    floor: this.getStartDate(),
+    ceil: this.getEndDate(),
+    // step: 1,
+    // showTicks: true,
+    // showTicksValues: true,
+    translate: (value: number): string => {
+      return this.convertToTime(value);
+    }
   };
   localTime: any;
   honolulu: any;
@@ -45,22 +49,35 @@ export class AppComponent {
   myDate: Date;
   currentTime: any;
   zoneOffset: any;
-
   public now: Date = new Date();
+
   constructor(public datepipe: DatePipe) {
-    let date = new Date();
-    let latest_date = this.datepipe.transform(date, 'yyyy-MM-dd');
-    console.log('userStartTime', latest_date);
     this.showCurrentTime();
     this.value = + new Date();
     this.timeChange();
     this.zoneOffset = moment().format("Z");
   }
 
+  getStartDate() {
+    var start = new Date();
+    start.setHours(0, 0, 0, 0);
+    return +start;
+  }
+
+  getEndDate() {
+    var start = new Date();
+    start.setHours(23, 59, 59, 999);
+    return +start;
+  }
+
   showCurrentTime() {
     setInterval(() => {
       this.now = new Date();
     }, 1);
+  }
+
+  convertToTime(val) {
+    return this.datepipe.transform(val, 'h:mm a');
   }
 
   timeChange() {
@@ -79,26 +96,9 @@ export class AppComponent {
     this.karachi = moment(this.value).utcOffset('+05:00').format('hh:mm A');
     this.mumbai = moment(this.value).utcOffset('+05:30').format('hh:mm A');
     this.beijing = moment(this.value).utcOffset('+08:00').format('hh:mm A');
-    this.singapore = moment(this.value).utcOffset('+8:00').format('hh:mm A');
+    this.singapore = moment(this.value).utcOffset('+08:00').format('hh:mm A');
     this.tokoyo = moment(this.value).utcOffset('+09:00').format('hh:mm A');
     this.sydney = moment(this.value).utcOffset('+11:00').format('hh:mm A');
     this.aucklend = moment(this.value).utcOffset('+13:00').format('hh:mm A');
-  }
-
-  mouseEnter(zone) {
-    // console.log(zone);
-    // this.zoneName = zone;
-    // let tooltipSpan = document.getElementById('tooltip-span');
-    // fromEvent(document.body, 'mousemove').subscribe((e: any) => {
-    //   var x = e.clientX,
-    //     y = e.clientY;
-    // tooltipSpan.style.top = (y - 10) + 'px';
-    // tooltipSpan.style.left = (x - 50) + 'px';
-    // })
-  }
-
-  resetTime() {
-    this.value = + new Date();
-    this.timeChange();
   }
 }

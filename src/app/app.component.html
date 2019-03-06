@@ -1,116 +1,107 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1 class="welcome-text">
-    Welcome to {{ title }}!
-  </h1>
-  <h2 class="local-time">
-    {{now | date: 'mediumTime'}}<br>
-    <span class="local-date">{{newDate| date: 'mediumDate'}}</span>
-  </h2>
-  <div class="custom-slider">
-    <ng5-slider [(value)]="value" [options]="options" (valueChange)="timeChange()"></ng5-slider>
+<div style="text-align:center" class="fix-cont">
+  <div class="welcome-div">
+    <span class="welcome-txt">Welcome to {{ title }}!</span>
   </div>
-  <table id="customers">
-    <tr>
-      <th>Zone Names
-      </th>
-      <th>
-        <span>All Time Zones</span>
-      </th>
-      <th>
-        <span>Local Time Zone</span>
-      </th>
-    </tr>
-    <tr class="{{zoneOffset == '-10:00' ? 'currentZone' : '' }}">
-      <td> Honolulu ( <small> HST UTC-10 </small>) </td>
-      <td>{{honolulu}}</td>
-      <td>{{localTime}}</td>
-    </tr>
-    <tr class="{{zoneOffset == '-08:00' ? 'currentZone' : '' }}">
-      <td> Pacific Time ( <small> PST UTC-8 </small>) </td>
-      <td>{{pst}} </td>
-      <td>{{localTime}}</td>
-    </tr>
-    <tr class="{{zoneOffset == '-07:00' ? 'currentZone' : '' }}">
-      <td> Mountain Time ( <small> MST UTC-7 </small>) </td>
-      <td>{{mst}} </td>
-      <td>{{localTime}}</td>
-    </tr>
-    <tr class="{{zoneOffset == '+06:00' ? 'currentZone' : '' }}">
-      <td> Centeral Time US & Canada ( <small> CST UTC-6 </small>) </td>
-      <td>{{cst}} </td>
-      <td>{{localTime}}</td>
-    </tr>
-    <tr class="{{zoneOffset == '-05:00' ? 'currentZone' : '' }}">
-      <td> Estern Time US & Canada ( <small> EST UTC-5 </small>) </td>
-      <td>{{est}} </td>
-      <td>{{localTime}}</td>
-    </tr>
-    <tr class="{{zoneOffset == '-03:00' ? 'currentZone' : '' }}">
-      <td> Rio de Janeiro ( <small> -03 UTC-5 </small>) </td>
-      <td>{{rdj}} </td>
-      <td>{{localTime}}</td>
-    </tr>
-    <tr class="{{zoneOffset == '+00:00' ? 'currentZone' : '' }}">
-      <td> UTC ( <small> UTC </small>) </td>
-      <td>{{utc}} </td>
-      <td>{{localTime}}</td>
-    </tr>
-    <tr class="{{zoneOffset == '+00:00' ? 'currentZone' : '' }}">
-      <td> London ( <small> GMT </small>) </td>
-      <td>{{london}} </td>
-      <td>{{localTime}}</td>
-    </tr>
-    <tr class="{{zoneOffset == '+01:00' ? 'currentZone' : '' }}">
-      <td> Berlin ( <small> CET UTC+1 </small>) </td>
-      <td>{{berlin}} </td>
-      <td>{{localTime}}</td>
-    </tr>
-    <tr class="{{zoneOffset == '+03:00' ? 'currentZone' : '' }}">
-      <td> Mascow ( <small> MSK UTC+3 </small>) </td>
-      <td>{{mascow}} </td>
-      <td>{{localTime}}</td>
-    </tr>
-    <tr class="{{zoneOffset == '+04:00' ? 'currentZone' : '' }}">
-      <td> Dubai ( <small> +04 UTC+4 </small>) </td>
-      <td>{{dubai}} </td>
-      <td>{{localTime}}</td>
-    </tr>
-    <tr class="{{zoneOffset == '+05:00' ? 'currentZone' : '' }}">
-      <td> Pakistan ( <small> GMT UTC+5 </small>) </td>
-      <td>{{karachi}} </td>
-      <td>{{localTime}}</td>
-    </tr>
-    <tr class="{{zoneOffset == '+05:30' ? 'currentZone' : '' }}">
-      <td> Mumbai ( <small> IST UTC+5:30 </small>) </td>
-      <td>{{mumbai}} </td>
-      <td>{{localTime}}</td>
-    </tr>
-    <tr class="{{zoneOffset == '+08:00' ? 'currentZone' : '' }}">
-      <td> Beijing ( <small> CST UTC+8 </small>) </td>
-      <td>{{beijing}} </td>
-      <td>{{localTime}}</td>
-    </tr>
-    <tr class="{{zoneOffset == '+08:00' ? 'currentZone' : '' }}">
-      <td> Singapore ( <small> +08 UTC+8 </small>) </td>
-      <td>{{singapore}} </td>
-      <td>{{localTime}}</td>
-    </tr>
-    <tr class="{{zoneOffset == '+09:00' ? 'currentZone' : '' }}">
-      <td> Tokoyo ( <small> JST UTC+9 </small>) </td>
-      <td>{{tokoyo}} </td>
-      <td>{{localTime}}</td>
-    </tr>
-    <tr class="{{zoneOffset == '+11:00' ? 'currentZone' : '' }}">
-      <td> Sydney ( <small> AEDT UTC+11 </small>) </td>
-      <td>{{sydney}} </td>
-      <td>{{localTime}}</td>
-    </tr>
-    <tr class="{{zoneOffset == '+13:00' ? 'currentZone' : '' }}">
-      <td> Auckland ( <small> NZDT UTC+13 </small>) </td>
-      <td>{{aucklend}} </td>
-      <td>{{localTime}}</td>
-    </tr>
-  </table>
+  <div class="container">
+    <div class="table-slider-container">
+
+      <div class="slider-container">
+        <div class="img-container">
+          <img src="./assets/imgs/logo.png">
+        </div>
+        <div class="custom-slider">
+          <ng5-slider [(value)]="value" [options]="options" (valueChange)="timeChange()"></ng5-slider>
+        </div>
+        <div class="time-container">
+          <span class="current-local-txt">Current Local Time</span><br>
+          <span class="time">{{now | date: 'mediumTime'}}</span><br>
+          <span class="date">{{newDate| date: 'mediumDate'}}</span>
+        </div>
+      </div>
+
+      <table id="customers">
+        <tr>
+          <th>Zone Name
+          </th>
+          <th>
+            <span>Zone Time</span>
+          </th>
+        </tr>
+        <tr class="{{zoneOffset == '-10:00' ? 'currentZone' : '' }}">
+          <td> Honolulu ( <small> HST UTC-10 </small>) </td>
+          <td>{{honolulu}}</td>
+        </tr>
+        <tr class="{{zoneOffset == '-08:00' ? 'currentZone' : '' }}">
+          <td> Pacific Time ( <small> PST UTC-8 </small>) </td>
+          <td>{{pst}} </td>
+        </tr>
+        <tr class="{{zoneOffset == '-07:00' ? 'currentZone' : '' }}">
+          <td> Mountain Time ( <small> MST UTC-7 </small>) </td>
+          <td>{{mst}} </td>
+        </tr>
+        <tr class="{{zoneOffset == '+06:00' ? 'currentZone' : '' }}">
+          <td> Centeral Time US & Canada ( <small> CST UTC-6 </small>) </td>
+          <td>{{cst}} </td>
+        </tr>
+        <tr class="{{zoneOffset == '-05:00' ? 'currentZone' : '' }}">
+          <td> Estern Time US & Canada ( <small> EST UTC-5 </small>) </td>
+          <td>{{est}} </td>
+        </tr>
+        <tr class="{{zoneOffset == '-03:00' ? 'currentZone' : '' }}">
+          <td> Rio de Janeiro ( <small> -03 UTC-5 </small>) </td>
+          <td>{{rdj}} </td>
+        </tr>
+        <tr class="{{zoneOffset == '+00:00' ? 'currentZone' : '' }}">
+          <td> UTC ( <small> UTC </small>) </td>
+          <td>{{utc}} </td>
+        </tr>
+        <tr class="{{zoneOffset == '+00:00' ? 'currentZone' : '' }}">
+          <td> London ( <small> GMT </small>) </td>
+          <td>{{london}} </td>
+        </tr>
+        <tr class="{{zoneOffset == '+01:00' ? 'currentZone' : '' }}">
+          <td> Berlin ( <small> CET UTC+1 </small>) </td>
+          <td>{{berlin}} </td>
+        </tr>
+        <tr class="{{zoneOffset == '+03:00' ? 'currentZone' : '' }}">
+          <td> Mascow ( <small> MSK UTC+3 </small>) </td>
+          <td>{{mascow}} </td>
+        </tr>
+        <tr class="{{zoneOffset == '+04:00' ? 'currentZone' : '' }}">
+          <td> Dubai ( <small> +04 UTC+4 </small>) </td>
+          <td>{{dubai}} </td>
+        </tr>
+        <tr class="{{zoneOffset == '+05:00' ? 'currentZone' : '' }}">
+          <td> Pakistan ( <small> GMT UTC+5 </small>) </td>
+          <td>{{karachi}} </td>
+        </tr>
+        <tr class="{{zoneOffset == '+05:30' ? 'currentZone' : '' }}">
+          <td> Mumbai ( <small> IST UTC+5:30 </small>) </td>
+          <td>{{mumbai}} </td>
+        </tr>
+        <tr class="{{zoneOffset == '+08:00' ? 'currentZone' : '' }}">
+          <td> Beijing ( <small> CST UTC+8 </small>) </td>
+          <td>{{beijing}} </td>
+        </tr>
+        <tr class="{{zoneOffset == '+08:00' ? 'currentZone' : '' }}">
+          <td> Singapore ( <small> +08 UTC+8 </small>) </td>
+          <td>{{singapore}} </td>
+        </tr>
+        <tr class="{{zoneOffset == '+09:00' ? 'currentZone' : '' }}">
+          <td> Tokoyo ( <small> JST UTC+9 </small>) </td>
+          <td>{{tokoyo}} </td>
+        </tr>
+        <tr class="{{zoneOffset == '+11:00' ? 'currentZone' : '' }}">
+          <td> Sydney ( <small> AEDT UTC+11 </small>) </td>
+          <td>{{sydney}} </td>
+        </tr>
+        <tr class="{{zoneOffset == '+13:00' ? 'currentZone' : '' }}">
+          <td> Auckland ( <small> NZDT UTC+13 </small>) </td>
+          <td>{{aucklend}} </td>
+        </tr>
+      </table>
+    </div>
+  </div>
 
   <router-outlet></router-outlet>
