@@ -129,11 +129,7 @@ table {
     margin-top: -3%;
 
     .ng5-slider .ng5-slider-bubble.ng5-slider-limit {
-      top: 0;
-      z-index: 99999;
-      font-size: 0.9em;
-      color: black !important;
-      font-family: "Fira Sans", sans-serif;
+      display: none;
     }
 
     .ng5-slider .ng5-slider-bar-wrapper {
