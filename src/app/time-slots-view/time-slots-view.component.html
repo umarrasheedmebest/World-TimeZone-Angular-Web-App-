@@ -1,0 +1,17 @@
+<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+  <div class="example-box" *ngFor="let zone of AllZoneTime" cdkDrag>
+      <span>{{zone.offset1}}</span><span>{{zone.city}}</span>  <span>{{now | date: 'hh:mm a': zone.offset1}}</span> 
+      <span>{{getStartDate(zone.offset2, 0)}}</span><span>{{getStartDate(zone.offset2, 1)}}</span>
+      <span>{{getStartDate(zone.offset2, 2)}}</span><span>{{getStartDate(zone.offset2, 3)}}</span>
+      <span>{{getStartDate(zone.offset2, 4)}}</span><span>{{getStartDate(zone.offset2, 5)}}</span>
+      <span>{{getStartDate(zone.offset2, 6)}}</span><span>{{getStartDate(zone.offset2, 7)}}</span>
+      <span>{{getStartDate(zone.offset2, 8)}}</span><span>{{getStartDate(zone.offset2, 9)}}</span>
+       <span>{{getStartDate(zone.offset2, 10)}}</span><span>{{getStartDate(zone.offset2, 11)}}</span>
+      <span>{{getStartDate(zone.offset2, 12)}}</span><span>{{getStartDate(zone.offset2, 13)}}</span>
+      <span>{{getStartDate(zone.offset2, 14)}}</span><span>{{getStartDate(zone.offset2, 15)}}</span>
+      <span>{{getStartDate(zone.offset2, 16)}}</span><span>{{getStartDate(zone.offset2, 17)}}</span>
+      <span>{{getStartDate(zone.offset2, 18)}}</span><span>{{getStartDate(zone.offset2, 19)}}</span>
+      <span>{{getStartDate(zone.offset2, 20)}}</span><span>{{getStartDate(zone.offset2, 21)}}</span>
+      <span>{{getStartDate(zone.offset2, 22)}}</span><span>{{getStartDate(zone.offset2, 23)}}</span>
+  </div>
+</div>

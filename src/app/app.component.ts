@@ -11,7 +11,7 @@ import { DatePipe } from '@angular/common'
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'PureLogics Clock';
+  title = 'World Clock';
   value: number;
   newDate = new Date();
   zoneName: any;
@@ -24,7 +24,7 @@ export class AppComponent {
     // showTicks: true,
     // showTicksValues: true,
     translate: (value: number): string => {
-      return this.convertToTime(value);
+      return this.convertToTime(value) + '<br><span style="font-size: 0.8em">Local Time</span>';
     }
   };
   localTime: any;
@@ -50,12 +50,20 @@ export class AppComponent {
   currentTime: any;
   zoneOffset: any;
   public now: Date = new Date();
-
+  currentDateTime: any;
+  marchSecondSunday: any;
+  novFirstSunday: any;
+  isDayLightSaving: boolean = false;
   constructor(public datepipe: DatePipe) {
     this.showCurrentTime();
     this.value = + new Date();
-    this.timeChange();
     this.zoneOffset = moment().format("Z");
+    let dateObj = new Date();
+    this.currentDateTime = dateObj.getTime();
+    let year = dateObj.getUTCFullYear();
+    this.marchSecondSunday = (new Date(year + '-' + 3 + '-' + this.sundaysInMonth(11, year)[1])).getTime();
+    this.novFirstSunday = (new Date(year + '-' + 11 + '-' + this.sundaysInMonth(11, year)[0])).getTime();
+    this.timeChange();
   }
 
   getStartDate() {
@@ -77,28 +85,48 @@ export class AppComponent {
   }
 
   convertToTime(val) {
-    return this.datepipe.transform(val, 'h:mm a');
+    return this.datepipe.transform(val, 'hh:mm a');
   }
 
   timeChange() {
-    this.localTime = moment(this.value).utcOffset('').format('hh:mm A');
-    this.honolulu = moment(this.value).utcOffset('-10:00').format('hh:mm A');
-    this.pst = moment(this.value).utcOffset('-08:00').format('hh:mm A');
-    this.mst = moment(this.value).utcOffset('-07:00').format('hh:mm A');
-    this.cst = moment(this.value).utcOffset('-06:00').format('hh:mm A');
-    this.est = moment(this.value).utcOffset('-05:00').format('hh:mm A');
-    this.rdj = moment(this.value).utcOffset('-03:00').format('hh:mm A');
-    this.utc = moment(this.value).utcOffset('+00:00').format('hh:mm A');
-    this.london = moment(this.value).utcOffset('+00:00').format('hh:mm A');
-    this.berlin = moment(this.value).utcOffset('+01:00').format('hh:mm A');
-    this.mascow = moment(this.value).utcOffset('+03:00').format('hh:mm A');
-    this.dubai = moment(this.value).utcOffset('+04:00').format('hh:mm A');
-    this.karachi = moment(this.value).utcOffset('+05:00').format('hh:mm A');
-    this.mumbai = moment(this.value).utcOffset('+05:30').format('hh:mm A');
-    this.beijing = moment(this.value).utcOffset('+08:00').format('hh:mm A');
-    this.singapore = moment(this.value).utcOffset('+08:00').format('hh:mm A');
-    this.tokoyo = moment(this.value).utcOffset('+09:00').format('hh:mm A');
-    this.sydney = moment(this.value).utcOffset('+11:00').format('hh:mm A');
-    this.aucklend = moment(this.value).utcOffset('+13:00').format('hh:mm A');
+    if (this.currentDateTime >= this.marchSecondSunday && this.currentDateTime <= this.novFirstSunday) {
+      console.log('DayLight savings');
+      this.isDayLightSaving = true;
+      this.pst = moment(this.value).utcOffset('-07:00').format('YYYY-MM-DD HH:mm');
+      this.mst = moment(this.value).utcOffset('-06:00').format('YYYY-MM-DD HH:mm');
+      this.cst = moment(this.value).utcOffset('-05:00').format('YYYY-MM-DD HH:mm');
+      this.est = moment(this.value).utcOffset('-04:00').format('YYYY-MM-DD HH:mm');
+    } else {
+      this.pst = moment(this.value).utcOffset('-08:00').format('YYYY-MM-DD HH:mm');
+      this.mst = moment(this.value).utcOffset('-07:00').format('YYYY-MM-DD HH:mm');
+      this.cst = moment(this.value).utcOffset('-06:00').format('YYYY-MM-DD HH:mm');
+      this.est = moment(this.value).utcOffset('-05:00').format('YYYY-MM-DD HH:mm');
+      this.isDayLightSaving = false;
+    }
+    this.honolulu = moment(this.value).utcOffset('-10:00').format('YYYY-MM-DD HH:mm');
+    this.rdj = moment(this.value).utcOffset('-03:00').format('YYYY-MM-DD HH:mm');
+    this.utc = moment(this.value).utcOffset('+00:00').format('YYYY-MM-DD HH:mm');
+    this.london = moment(this.value).utcOffset('+00:00').format('YYYY-MM-DD HH:mm');
+    this.berlin = moment(this.value).utcOffset('+01:00').format('YYYY-MM-DD HH:mm');
+    this.mascow = moment(this.value).utcOffset('+03:00').format('YYYY-MM-DD HH:mm');
+    this.dubai = moment(this.value).utcOffset('+04:00').format('YYYY-MM-DD HH:mm');
+    this.karachi = moment(this.value).utcOffset('+05:00').format('YYYY-MM-DD HH:mm');
+    this.mumbai = moment(this.value).utcOffset('+05:30').format('YYYY-MM-DD HH:mm');
+    this.beijing = moment(this.value).utcOffset('+08:00').format('YYYY-MM-DD HH:mm');
+    this.singapore = moment(this.value).utcOffset('+08:00').format('YYYY-MM-DD HH:mm');
+    this.tokoyo = moment(this.value).utcOffset('+09:00').format('YYYY-MM-DD HH:mm');
+    this.sydney = moment(this.value).utcOffset('+11:00').format('YYYY-MM-DD HH:mm');
+    this.aucklend = moment(this.value).utcOffset('+13:00').format('YYYY-MM-DD HH:mm');
+
   }
+
+  sundaysInMonth(m, y) {
+    var days = new Date(y, m, 0).getDate();
+    var sundays = [8 - (new Date(m + '/01/' + y).getDay())];
+    for (var i = sundays[0] + 7; i < days; i += 7) {
+      sundays.push(i);
+    }
+    return sundays;
+  }
+
 }
